@@ -12,9 +12,6 @@ import software.amazon.awscdk.services.codepipeline.actions.GitHubSourceAction;
 import software.amazon.awscdk.services.codepipeline.actions.GitHubTrigger;
 
 public class CdkpipelineprojectStack extends Stack {
-    public CdkpipelineprojectStack(final Construct scope, final String id) {
-        this(scope, id, null);
-    }
 
     public CdkpipelineprojectStack(final Construct scope, final String id, final StackProps props)
     {
@@ -29,10 +26,10 @@ public class CdkpipelineprojectStack extends Stack {
                 .sourceAction(GitHubSourceAction.Builder.create()
                         .actionName("GitHub")
                         .output(sourceArtifact)
-                        .oauthToken(SecretValue.secretsManager("d5e9a9325cfbfd2d7fe3785ee20c0a463d25b0ba"))
+                        .oauthToken(SecretValue.secretsManager("github-token"))
                         .trigger(GitHubTrigger.POLL)
                         .owner("kullu-ashish")
-                        .repo("https://github.com/kullu-ashish/cdkpipelineproject.git")
+                        .repo("cdkpipelineproject")
                         .build())
                 .synthAction(SimpleSynthAction.standardNpmSynth(
                         StandardNpmSynthOptions.builder()
