@@ -13,6 +13,11 @@ import software.amazon.awscdk.services.codepipeline.actions.GitHubTrigger;
 
 public class CdkpipelineprojectStack extends Stack {
 
+
+    public CdkpipelineprojectStack(final Construct scope, final String id) {
+        this(scope, id, null);
+    }
+
     public CdkpipelineprojectStack(final Construct scope, final String id, final StackProps props)
     {
         super(scope, id, props);
@@ -29,7 +34,7 @@ public class CdkpipelineprojectStack extends Stack {
                         .oauthToken(SecretValue.secretsManager("github-token"))
                         .trigger(GitHubTrigger.POLL)
                         .owner("kullu-ashish")
-                        .repo("cdkpipelineproject")
+                        .repo("cdkpipelineproject.git")
                         .build())
                 .synthAction(SimpleSynthAction.Builder.create()
                 	.sourceArtifact(sourceArtifact)
