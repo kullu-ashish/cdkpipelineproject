@@ -31,12 +31,13 @@ public class CdkpipelineprojectStack extends Stack {
                         .owner("kullu-ashish")
                         .repo("cdkpipelineproject")
                         .build())
-                .synthAction(SimpleSynthAction.standardNpmSynth(
-                        StandardNpmSynthOptions.builder()
-                            .sourceArtifact(sourceArtifact)
-                            .cloudAssemblyArtifact(cloudAssemblyArtifact)
-                            .buildCommand("npm run build")
-                            .build()))
+                .synthAction(SimpleSynthAction.Builder.create()
+                	.sourceArtifact(sourceArtifact)
+			.cloudAssemblyArtifact(cloudAssemblyArtifact)
+			.installCommand("npm install -g aws-cdk")
+			.buildCommand("mvn package")
+			.synthCommand("cdk synth")
+			.build())
                 .build();
     }
  
